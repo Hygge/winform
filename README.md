@@ -24,7 +24,7 @@
 总结：
 
 1. 对桌面项目和winform组件的熟悉。
-2. 桌面项目架构熟悉，分为 UI、Bll、Dal、Model、Common。
+2. 应用项目架构熟悉MVC模式三层架构，分为 **UI、Bll、Dal**、Model、Common。
 3. 熟悉C#中ado 操作数据库的crud，通用文件 **SqliteHelper.cs**。
 4. 熟悉一下npoi导出execl，参考 [使用NPOI进行Excel数据的导入导出 - springsnow - 博客园 (cnblogs.com)](https://www.cnblogs.com/springsnow/p/13123912.html)
 
