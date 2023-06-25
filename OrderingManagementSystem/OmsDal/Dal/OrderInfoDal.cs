@@ -297,6 +297,7 @@ namespace OmsDal.Dal
                 }
                 catch (Exception ex)
                 {
+                    result = 0;
                     transaction.Rollback();                   
                 }               
                                 
