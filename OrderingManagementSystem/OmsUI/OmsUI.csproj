@@ -116,6 +116,18 @@
     <Compile Include="Views\FormMemberTypeInfo.Designer.cs">
       <DependentUpon>FormMemberTypeInfo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\FormOrderDish.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormOrderDish.Designer.cs">
+      <DependentUpon>FormOrderDish.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormOrderPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\FormOrderPay.Designer.cs">
+      <DependentUpon>FormOrderPay.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormTableInfo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -164,6 +176,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormMemberTypeInfo.resx">
       <DependentUpon>FormMemberTypeInfo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormOrderDish.resx">
+      <DependentUpon>FormOrderDish.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\FormOrderPay.resx">
+      <DependentUpon>FormOrderPay.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\FormTableInfo.resx">
       <DependentUpon>FormTableInfo.cs</DependentUpon>

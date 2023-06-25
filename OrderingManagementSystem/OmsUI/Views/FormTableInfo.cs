@@ -20,6 +20,8 @@ namespace OmsUI.Views
 
         private static FormTableInfo formTableInfo;
 
+        public event Action Refresh;
+
         public static FormTableInfo CreatedFormTableInfo()
         {
             if (formTableInfo == null)
@@ -139,6 +141,7 @@ namespace OmsUI.Views
                 MessageBox.Show("保存失败");
             }
             LoadList();
+            Refresh();
 
         }
 
@@ -163,6 +166,7 @@ namespace OmsUI.Views
                 {
                     MessageBox.Show("删除成功");
                     LoadList();
+                    Refresh();
                 }
             }
             

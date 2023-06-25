@@ -1,6 +1,7 @@
 ﻿using domain.Model;
 using OmsDal.Utils;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SQLite;
@@ -23,6 +24,32 @@ namespace CaterDal
                          "where mi.mIsDelete=0 ";        
             //执行得到结果集
             return SqliteHelper.ExecuteDataTable(sql);
+        }
+
+        public MemberInfo SelectOneById(int id)
+        {
+            string sql = "select mi.*,mti.mTitle as MTypeTitle " +
+                  "from MemberInfo as mi " +
+                  "inner join MemberTypeInfo as mti " +
+                  "on mi.mTypeId=mti.mid " +
+                  "where mi.mIsDelete=0 and mi.mid=@id ";
+            //执行得到结果集
+            DataTable dt = SqliteHelper.ExecuteDataTable(sql, new SQLiteParameter("@id", id));
+            if(dt.Rows.Count == 0)
+            {
+                return null;
+            }
+            DataRow row =  dt.Rows[0];
+
+            return new MemberInfo()
+            {
+                MId = Convert.ToInt32(row["mid"]),
+                MName = row["mname"].ToString(),
+                MPhone = row["mphone"].ToString(),
+                MMoney = Convert.ToDecimal(row["mmoney"]),
+                MTypeId = Convert.ToInt32(row["MTypeId"]),
+                MTypeTitle = row["MTypeTitle"].ToString()
+            };
         }
 
         public List<MemberInfo> GetList(Dictionary<string,string> dic)

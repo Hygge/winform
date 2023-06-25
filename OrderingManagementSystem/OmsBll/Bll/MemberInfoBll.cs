@@ -27,6 +27,10 @@ namespace OmsBll.Bll
         {
             return _memberInfoDal.Insert(memberInfo);
         }
+        public MemberInfo GetOneById(int memberInfo)
+        {
+            return _memberInfoDal.SelectOneById(memberInfo);
+        }
 
         public int UpdateMemberInfo(MemberInfo memberInfo)
         {

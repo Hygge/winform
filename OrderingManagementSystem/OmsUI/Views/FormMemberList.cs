@@ -77,6 +77,7 @@ namespace OmsUI.Views
         private void btnCancel_Click(object sender, EventArgs e)
         {
             //取消
+            txtId.Text = "添加时无编号";
             txtNameAdd.Text = string.Empty;
             txtPhoneAdd.Text = string.Empty;
             txtMoney.Text = string.Empty;
@@ -131,6 +132,7 @@ namespace OmsUI.Views
             {
                 MessageBox.Show("保存成功");
                 btnCancel_Click(null, null);
+                LoadTypeInfo();
 
             }
             else
@@ -168,6 +170,17 @@ namespace OmsUI.Views
         private void FormMemberList_FormClosed(object sender, FormClosedEventArgs e)
         {
             formMemberList = null; 
+        }
+
+        private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DataGridViewRow row =  dgvList.Rows[e.RowIndex];
+            txtId.Text = Convert.ToString(row.Cells[0].Value);
+            txtNameAdd.Text = Convert.ToString(row.Cells[1].Value);
+            ddlType.Text = Convert.ToString(row.Cells[2].Value);
+            txtPhoneAdd.Text = Convert.ToString(row.Cells[3].Value);
+            txtMoney.Text = Convert.ToString(row.Cells[4].Value);
+
         }
     }
 }

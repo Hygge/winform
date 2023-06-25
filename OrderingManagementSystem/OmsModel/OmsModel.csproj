@@ -58,6 +58,8 @@
     <Compile Include="Domain\OrderDetailInfo.cs" />
     <Compile Include="Domain\OrderInfo.cs" />
     <Compile Include="Domain\TableInfo.cs" />
+    <Compile Include="Dto\OrderPayMoneyDTO.cs" />
+    <Compile Include="Dto\TakeOrderDishInfoDTO.cs" />
     <Compile Include="Enum\LoginState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">

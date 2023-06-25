@@ -27,6 +27,11 @@ namespace CaterDal
             {
                 sql += " and di.DTitle like @dtitle";
                 listP.Add(new SQLiteParameter("@dtitle", "%" + dic["dtitle"] + "%"));
+            } 
+            if (dic.ContainsKey("dchar"))
+            {
+                sql += " and di.DTitle like @dchar";
+                listP.Add(new SQLiteParameter("@dchar", "%" + dic["dchar"] + "%"));
             }
             if (dic.ContainsKey("dtypeId"))
             {

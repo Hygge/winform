@@ -71,6 +71,7 @@
     <Compile Include="Bll\DishTypeInfoBll.cs" />
     <Compile Include="Bll\HallInfoBll.cs" />
     <Compile Include="Bll\MemberInfoBll.cs" />
+    <Compile Include="Bll\OrderInfoBll.cs" />
     <Compile Include="Bll\TableInfoBll.cs" />
     <Compile Include="Bll\MemberTypeInfoBll.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
