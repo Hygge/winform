@@ -245,55 +245,61 @@ namespace OmsDal.Dal
                 cmd.Transaction = transaction;              
                 SQLiteParameter[] ps;
 
-                // 会员
-                if (memberInfoId > 0)
-                {       
-                    // 使用余额
-                    if (isBal == 1)
+                try
+                {
+                    // 会员
+                    if (memberInfoId > 0)
                     {
-                        string updateMemberInfo = "update memberInfo set MMoney=@balance where MId=@mid ";
-                        // 更新会员余额
-                        cmd.CommandText = updateMemberInfo;
-                        cmd.Parameters.AddRange(new SQLiteParameter[2] {
+                        // 使用余额
+                        if (isBal == 1)
+                        {
+                            string updateMemberInfo = "update memberInfo set MMoney=@balance where MId=@mid ";
+                            // 更新会员余额
+                            cmd.CommandText = updateMemberInfo;
+                            cmd.Parameters.AddRange(new SQLiteParameter[2] {
                             new SQLiteParameter("mid", memberInfoId),
                             new SQLiteParameter("balance", balance)
                         });
-                        result += cmd.ExecuteNonQuery();
-                    }
-                    string updateSqlOrderInfo2 = "update orderInfo set MemberId=@memberId, OMoney=@money , IsPay=1, Discount=@discount where OId=@oid";
-                    // 更新订单状态
-                    cmd.CommandText = updateSqlOrderInfo2;
-                    cmd.Parameters.AddRange(new SQLiteParameter[4] {
+                            result += cmd.ExecuteNonQuery();
+                        }
+                        string updateSqlOrderInfo2 = "update orderInfo set MemberId=@memberId, OMoney=@money , IsPay=1, Discount=@discount where OId=@oid";
+                        // 更新订单状态
+                        cmd.CommandText = updateSqlOrderInfo2;
+                        cmd.Parameters.AddRange(new SQLiteParameter[4] {
                         new SQLiteParameter("memberId", memberInfoId),
                         new SQLiteParameter("money", money),
-                        new SQLiteParameter("discount", discount),                        
+                        new SQLiteParameter("discount", discount),
                         new SQLiteParameter("oid", oid)
                     });
-                    result += cmd.ExecuteNonQuery(); 
-                }
-                else
-                {
-                    // 不是会员    更新订单表，保存金额、支付状态，更新桌位状态未空闲
-                    string updateSqlOrderInfo = "update orderInfo set OMoney=@money , IsPay=1 where OId=@oid";
+                        result += cmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        // 不是会员    更新订单表，保存金额、支付状态，更新桌位状态未空闲
+                        string updateSqlOrderInfo = "update orderInfo set OMoney=@money , IsPay=1 where OId=@oid";
+                        ps = new SQLiteParameter[]
+                        {
+                        new SQLiteParameter("@oid", oid), new SQLiteParameter("@money", money)
+                        };
+                        cmd.CommandText = updateSqlOrderInfo;
+                        cmd.Parameters.AddRange(ps);
+                        result += cmd.ExecuteNonQuery();
+                    }
+                    // 更新桌位状态
+                    string updateSqlTable = "update tableInfo set TIsFree=1 where TId=@tid";
                     ps = new SQLiteParameter[]
                     {
-                        new SQLiteParameter("@oid", oid), new SQLiteParameter("@money", money)
+                        new SQLiteParameter("@tid", tid)
                     };
-                    cmd.CommandText = updateSqlOrderInfo;
+                    cmd.CommandText = updateSqlTable;
                     cmd.Parameters.AddRange(ps);
                     result += cmd.ExecuteNonQuery();
                 }
-                // 更新桌位状态
-                string updateSqlTable = "update tableInfo set TIsFree=1 where TId=@tid";
-                ps = new SQLiteParameter[]
+                catch (Exception ex)
                 {
-                        new SQLiteParameter("@tid", tid)
-                };
-                cmd.CommandText = updateSqlTable;
-                cmd.Parameters.AddRange(ps);
-                result += cmd.ExecuteNonQuery();
-
-                
+                    transaction.Rollback();                   
+                }               
+                                
                 transaction.Commit();
                 sqlConn.Close();
 
